@@ -36,27 +36,25 @@ For an application or demo submission, the normal package is:
 - the code repository
 - optionally a short Loom demo
 
-This repo is now prepared for a durable Render deployment:
+This repo is now prepared for a quick public Render deployment:
 
 - [`requirements.txt`](/Users/divi/Documents/New%20project/requirements.txt) installs the Python dependencies plus `gunicorn`
-- [`render.yaml`](/Users/divi/Documents/New%20project/render.yaml) defines a Render web service and a persistent disk
-- `server.py` now respects a `DB_PATH` environment variable, so SQLite can live on a persistent disk instead of ephemeral app storage
+- [`render.yaml`](/Users/divi/Documents/New%20project/render.yaml) defines a Render web service
+- `server.py` now respects a `DB_PATH` environment variable, so the hosted SQLite location can be configured
 
 ### Fastest production-ish deploy on Render
 
 1. Push this folder to a GitHub repository.
 2. In Render, choose `New +` → `Blueprint`.
 3. Select the GitHub repo.
-4. Render will read [`render.yaml`](/Users/divi/Documents/New%20project/render.yaml) and provision:
-   - a Python web service
-   - a persistent disk mounted at `/var/data`
+4. Render will read [`render.yaml`](/Users/divi/Documents/New%20project/render.yaml) and provision a Python web service.
 5. After deploy, use the generated `onrender.com` URL in your application form.
 
 ### Why this is the right submission path
 
 - A tunnel link is not reliable enough for an application review.
 - A real hosted URL stays up after your laptop sleeps or disconnects.
-- The persistent disk keeps your SQLite-backed demo data alive across restarts.
+- This free-path setup is suitable for a demo/application link, but its local SQLite data is ephemeral and may reset on redeploy or restart.
 
 ## Prototype features
 
