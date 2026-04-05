@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: complianceiq
+    env: python
+    plan: starter
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn server:app --bind 0.0.0.0:$PORT --workers 2 --threads 4 --timeout 120
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.2
+      - key: DB_PATH
+        value: /var/data/complianceiq.sqlite3
+      - key: FLASK_DEBUG
+        value: "0"
+    disk:
+      name: complianceiq-data
+      mountPath: /var/data
+      sizeGB: 1
